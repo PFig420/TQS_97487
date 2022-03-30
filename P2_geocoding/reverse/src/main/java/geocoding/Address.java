@@ -1,4 +1,4 @@
-package main.java.geocoding;
+package geocoding;
 
 
 import java.util.Objects;

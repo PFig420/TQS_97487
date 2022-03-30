@@ -1,4 +1,4 @@
-package main.java.geocoding;
+package geocoding;
 
 import org.apache.http.ParseException;
 import org.apache.http.client.utils.URIBuilder;
