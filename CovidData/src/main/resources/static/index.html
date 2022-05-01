@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+    <meta charset="UTF-8">
+    <head>
+        <!-- <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> -->
+        <title>Home Page</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <style>
+            body {
+                    /* Centring content */
+                    min-height: 100vh;
+                    display: grid;
+                    place-content: center;
+                    }
+
+                    /* Adapts a floating label for use with a left-handed input group icon */
+                    .form-floating > .bi-calendar-date + .datepicker_input + label {
+                    padding-left: 3.5rem;
+                    z-index: 3;
+                }
+        </style>
+    </head>
+    <body>
+
+        <div class="container" style="text-align: center; margin-top: 2%; margin-bottom: 2%;">
+            <h1 style="text-align: center; margin-top: 2%;  font-family: 'Raleway',sans-serif; font-size: 45px; font-weight: 800; line-height: 72px;">COVID STATS</h1>
+            <div style="padding-bottom: 5%;">
+                <h5 style="position: absolute; left: 30%; width: 40%;">Check COVID stats</h5>
+            </div>
+        </div>
+
+        <div class="row">
+        <div class="d-flex justify-content-around">
+            
+            <div class="input-group">
+                <div class="input-group-prepend">
+                <span class="input-group-text">With textarea</span>
+                </div>
+                <textarea id="txt" class="form-control" aria-label="With textarea"></textarea>
+            </div>
+            <input type="date" id="birthday" name="birthday">
+        </div>
+        </div>
+
+        <div class="row">
+            <button type="button" class="btn btn-secondary" onclick="submitter()">Search Covid Metrics</button>
+        </div>
+
+        <div class="container" id="res_cont">
+            <div class="row" >
+              <div class="col">
+                1 of 2
+              </div>
+              <div class="col">
+                2 of 2
+              </div>
+            </div>>
+        </div>
+     
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+        <script>
+            let x = null;
+            let y = null;
+           
+
+            function submitter(){
+                let x = document.getElementById("txt").value;
+                //let y = document.getElementById("datepicker1").value;
+                console.log('http://localhost:8080/covidstats/'+x);
+                $.ajax({
+                    url: "http://localhost:8080/covidstats/"+x,
+                    type:"GET",
+                    success: function(result){
+                        console.log(result);
+                            //document.getElementById("res_Group").innerHTML += "<li class='list-group-item'>"+result.date+"</li>";
+                            document.getElementById("res_Group").innerHTML += "<div class='row'> <div class='col>Date</div> <div class='col>"+result.date+" </div>"
+                    }
+                })
+                //$.get("http://localhost:8080/covidstats/"+x+y);
+            }
+            
+
+
+            
+        </script>
+    </body>
+</html>
