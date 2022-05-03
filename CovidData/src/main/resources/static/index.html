@@ -49,14 +49,7 @@
         </div>
 
         <div class="container" id="res_cont">
-            <div class="row" >
-              <div class="col">
-                1 of 2
-              </div>
-              <div class="col">
-                2 of 2
-              </div>
-            </div>>
+           
         </div>
      
 
@@ -69,15 +62,28 @@
 
             function submitter(){
                 let x = document.getElementById("txt").value;
+                let y = document.getElementById("birthday").value;
                 //let y = document.getElementById("datepicker1").value;
-                console.log('http://localhost:8080/covidstats/'+x);
+                console.log('http://localhost:8080/covidstats/'+x+'/'+y);
+                console.log(y)
+
                 $.ajax({
-                    url: "http://localhost:8080/covidstats/"+x,
+                    url: "http://localhost:8080/covidstats/"+x+'/'+y,
                     type:"GET",
                     success: function(result){
                         console.log(result);
+                        const list = document.getElementById("res_cont");
+                        while (list.hasChildNodes()) {
+                            list.removeChild(list.firstChild);
+                        }
                             //document.getElementById("res_Group").innerHTML += "<li class='list-group-item'>"+result.date+"</li>";
-                            document.getElementById("res_Group").innerHTML += "<div class='row'> <div class='col>Date</div> <div class='col>"+result.date+" </div>"
+                            document.getElementById("res_cont").innerHTML += "<div class='row'> <div class='col'>Date</div> <div class='col'>"+result.date+" </div>"
+                            document.getElementById("res_cont").innerHTML += "<div class='row'> <div class='col'>Deaths</div> <div class='col'>"+result.deaths+" </div>"
+                            document.getElementById("res_cont").innerHTML += "<div class='row'> <div class='col'>Recovered</div> <div class='col'>"+result.recovered+" </div>"
+                            document.getElementById("res_cont").innerHTML += "<div class='row'> <div class='col'>Active cases</div> <div class='col'>"+result.active+" </div>"
+                            document.getElementById("res_cont").innerHTML += "<div class='row'> <div class='col'>Confirmed Cases</div> <div class='col'>"+result.confCases+" </div>"
+                            document.getElementById("res_cont").innerHTML += "<div class='row'> <div class='col'>Active cases difference</div> <div class='col'>"+result.active_diff+" </div>"
+                            document.getElementById("res_cont").innerHTML += "<div class='row'> <div class='col'>Fatality Rate</div> <div class='col'>"+result.fatality_rate+" </div>"
                     }
                 })
                 //$.get("http://localhost:8080/covidstats/"+x+y);
